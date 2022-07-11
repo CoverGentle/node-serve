@@ -1,9 +1,13 @@
 import express ,{Express,Router,Request,Response}from 'express'
 import axios from 'axios'
+import { nextTick } from 'process'
 const app:Express = express()
 
 const router:Router = express.Router()
-
+app.use('*',(req,res,next)=>{
+  res.header('Access-Control-Allow-Origin','*')
+  next()
+})
 app.use('/api',router)
 
 router.get('/list',async (req:Request,res:Response)=>{
